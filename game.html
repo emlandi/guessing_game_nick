@@ -1,0 +1,23 @@
+<script>
+var usr, answer, currentGuess, lowerlimit, upperlimit;
+alert("Think of a number between 0 and 100");
+currentGuess = 50;
+lowerlimit = 0;
+upperlimit = 100;
+while(true){
+usr = prompt("Is your number "+ currentGuess + "? If not, is it greater than or less than " + currentGuess + "?");
+if(usr === "greater than"){
+  lowerlimit = currentGuess;
+  currentGuess = Math.round(Math.random() * (upperlimit - lowerlimit) + lowerlimit)
+}
+else if(usr === "less than"){
+  upperlimit = currentGuess;
+  currentGuess = Math.round(Math.random() * (upperlimit - lowerlimit) + lowerlimit)
+}
+else{
+  break;
+}
+
+}
+alert("I won!");
+</script>
