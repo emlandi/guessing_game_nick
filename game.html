@@ -1,8 +1,10 @@
 <script>
-var usr, answer, currentGuess, lowerlimit, upperlimit;
+var usr, answer, currentGuess, lowerlimit, upperlimit, number, numberOfGuesses, numberOfGuessesForUsr;
+numberOfGuesses = 0;
+numberOfGuessesForUsr = 0;
+lowerlimit = 0;
+upperlimit = prompt("upperlimit");
 currentGuess = Math.round(Math.random() * (upperlimit - lowerlimit) + lowerlimit);
-lowerlimit = prompt("lowerlimit");
-upperlimit = prompt("Upperlimit");
 alert("Think of a number between "+lowerlimit+" and "+upperlimit+".");
 while(true){
 usr = prompt("Is your number "+ currentGuess + "? If not, is it greater than or less than " + currentGuess + "?");//prompts user for input about number
@@ -17,7 +19,19 @@ else if(usr === "less than"){
 else{
   break;
 }
-
+numberOfGuesses += 1;
 }
-alert("I won!");
+alert("I won! It took me "+numberOfGuesses+" guesses. Okay, now it's your turn");
+number = Math.round(Math.random() * (upperlimit - lowerlimit) + lowerlimit);
+while(usr != number){
+usr = prompt("What number do you think I am thinking of?");
+if(number < usr){
+  alert("less than");
+}
+else if(number > usr){
+  alert("greater than");
+}
+numberOfGuessesForUsr += 1;
+}
+alert("You won! It took you "+numberOfGuessesForUsr+" guesses.");
 </script>
