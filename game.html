@@ -1,37 +1,63 @@
 <script>
-var usr, answer, currentGuess, lowerlimit, upperlimit, number, numberOfGuesses, numberOfGuessesForUsr;
+var usr,
+    answer,
+    currentGuess,
+    lowerlimit,
+    upperlimit,
+    number,
+    numberOfGuesses,
+    numberOfGuessesForUsr;
+
 numberOfGuesses = 0;
+
 numberOfGuessesForUsr = 0;
-lowerlimit = 0;
-upperlimit = prompt("upperlimit");
-currentGuess = Math.round(Math.random() * (upperlimit - lowerlimit) + lowerlimit);
-alert("Think of a number between "+lowerlimit+" and "+upperlimit+".");
+
+lowerlimit = 1;
+
+upperlimit = prompt("Please choose a high number for you and I to guess from.");
+
+currentGuess = Math.floor(Math.random() * (upperlimit - lowerlimit) + lowerlimit);
+
+alert("Think of a number between " + lowerlimit + " and " + upperlimit + ".");
+
 while(true){
-usr = prompt("Is your number "+ currentGuess + "? If not, is it greater than or less than " + currentGuess + "?");//prompts user for input about number
-if(usr === "greater than"){
-  lowerlimit = currentGuess;//sets the lowerlimit to the number just guessed
-  currentGuess = Math.round(Math.random() * (upperlimit - lowerlimit) + lowerlimit);//chooses a random number between the upper and lower limits.
-}
-else if(usr === "less than"){
-  upperlimit = currentGuess;//sets the upperlimit to the number just guessed
-  currentGuess = Math.round(Math.random() * (upperlimit - lowerlimit) + lowerlimit);//chooses a random number between the upper and lower limits.
-}
-else{
-  break;
-}
+  //prompt user for input about number
+  usr = prompt("Is your number " + currentGuess + "? If not, is it greater than or less than " + currentGuess + "?");
+
+    if(usr.toLowerCase() === "greater than" || usr.toLowerCase() === "greater"){
+      lowerlimit = currentGuess;//sets lowerlimit to the number guessed
+      currentGuess = Math.floor(Math.random() * (upperlimit - lowerlimit) + lowerlimit);//chooses random number between upper & lower limits
+    }
+    else if(usr.toLowerCase() === "less than" || usr.toLowerCase() ==="less"){
+      upperlimit = currentGuess;//sets upperlimit to number just guessed
+      currentGuess = Math.floor(Math.random() * (upperlimit - lowerlimit) + lowerlimit);//chooses random number between upper and lower limits.
+    }
+    else{
+      break;
+    }
+
 numberOfGuesses += 1;
 }
-alert("I won! It took me "+numberOfGuesses+" guesses. Okay, now it's your turn");
-number = Math.round(Math.random() * (upperlimit - lowerlimit) + lowerlimit);
+
+alert("I won! It took me " + numberOfGuesses + " guesses. Okay, now it's your turn");
+
+number = Math.floor(Math.random() * (upperlimit - lowerlimit) + lowerlimit);
+
 while(usr != number){
-usr = prompt("What number do you think I am thinking of?");
-if(number < usr){
-  alert("less than");
+  usr = prompt("What number do you think I am thinking of?");
+    if(number < usr){
+      alert("My number is less than " + usr + "!");
+    }
+    else if(number > usr){
+      alert("My number is greater than " + usr + "!");
+    }
+    numberOfGuessesForUsr += 1;
+    }
+alert("You won! It took you " + numberOfGuessesForUsr + " guesses.");
+
+if (numberOfGuesses < numberOfGuessesForUsr) {
+  alert("You had to guess " + ((numberOfGuessesForUsr - numberOfGuesses) + 1) + " times! You will never beat me!!!!")
+} else {
+  alert("You must have cheated.")
 }
-else if(number > usr){
-  alert("greater than");
-}
-numberOfGuessesForUsr += 1;
-}
-alert("You won! It took you "+numberOfGuessesForUsr+" guesses.");
 </script>
