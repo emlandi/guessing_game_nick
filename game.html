@@ -1,4 +1,19 @@
 <script>
+
+var Game = function(){
+  this.usr = "";
+  this.answer = "";
+  this.currentGuess = 0;
+  this.lowerlimit = 1;
+  this.upperlimit = 0;
+  this.number = 0;
+  this.numberOfGuesses = 0;
+  this.numberOfGuessesForUsr = 0;
+}
+
+var game = new Game();
+
+/*
 var usr,
     answer,
     currentGuess,
@@ -11,52 +26,57 @@ var usr,
 numberOfGuesses = 0;
 
 numberOfGuessesForUsr = 0;
+*/
 
-lowerlimit = 1;
+game.lowerlimit = 1;
 
-upperlimit = prompt("Please choose a high number for you and I to guess from.");
+game.upperlimit = prompt("Please choose a high number for you and I to guess from.");
 
-currentGuess = Math.floor(Math.random() * (upperlimit - lowerlimit) + lowerlimit);
+function Random(upper, lower){
+  return Math.floor(Math.random() * (upper - lower) + lower);
+}
 
-alert("Think of a number between " + lowerlimit + " and " + upperlimit + ".");
+game.number = Random(game.upperlimit, game.lowerlimit);
+
+game.currentGuess = Random(game.upperlimit, game.lowerlimit);
+
+alert("Think of a number between " + game.lowerlimit + " and " + game.upperlimit + ".");
 
 while(true){
   //prompt user for input about number
-  usr = prompt("Is your number " + currentGuess + "? If not, is it greater than or less than " + currentGuess + "?");
+  game.usr = prompt("Is your number " + game.currentGuess + "? If not, is it greater than or less than " + game.currentGuess + "?");
 
-    if(usr.toLowerCase() === "greater than" || usr.toLowerCase() === "greater"){
-      lowerlimit = currentGuess;//sets lowerlimit to the number guessed
-      currentGuess = Math.floor(Math.random() * (upperlimit - lowerlimit) + lowerlimit);//chooses random number between upper & lower limits
+    if(game.usr.toLowerCase() === "greater than" || game.usr.toLowerCase() === "greater"){
+      game.lowerlimit = game.currentGuess;//sets lowerlimit to the number guessed
+      game.currentGuess = Random(game.upperlimit, game.lowerlimit);//chooses random number between upper & lower limits
     }
-    else if(usr.toLowerCase() === "less than" || usr.toLowerCase() ==="less"){
-      upperlimit = currentGuess;//sets upperlimit to number just guessed
-      currentGuess = Math.floor(Math.random() * (upperlimit - lowerlimit) + lowerlimit);//chooses random number between upper and lower limits.
+    else if(game.usr.toLowerCase() === "less than" || game.usr.toLowerCase() ==="less"){
+      game.upperlimit = game.currentGuess;//sets upperlimit to number just guessed
+      game.currentGuess = Random(game.upperlimit, game.lowerlimit);//chooses random number between upper and lower limits.
     }
     else{
       break;
     }
 
-numberOfGuesses += 1;
+game.numberOfGuesses += 1;
 }
 
-alert("I won! It took me " + numberOfGuesses + " guesses. Okay, now it's your turn");
+alert("I won! It took me " + game.numberOfGuesses + " guesses. Okay, now it's your turn");
 
-number = Math.floor(Math.random() * (upperlimit - lowerlimit) + lowerlimit);
+while(game.usr != game.number){
+  game.usr = prompt("What number do you think I am thinking of?");
+    if(game.number < game.usr){
+      alert("My number is less than " + game.usr + "!");
+    }
+    else if(game.number > game.usr){
+      alert("My number is greater than " + game.usr + "!");
+    }
+    game.numberOfGuessesForUsr += 1;
+    }
+alert("You won! It took you " + game.numberOfGuessesForUsr + " guesses.");
 
-while(usr != number){
-  usr = prompt("What number do you think I am thinking of?");
-    if(number < usr){
-      alert("My number is less than " + usr + "!");
-    }
-    else if(number > usr){
-      alert("My number is greater than " + usr + "!");
-    }
-    numberOfGuessesForUsr += 1;
-    }
-alert("You won! It took you " + numberOfGuessesForUsr + " guesses.");
-
-if (numberOfGuesses < numberOfGuessesForUsr) {
-  alert("You had to guess " + ((numberOfGuessesForUsr - numberOfGuesses) + 1) + " times! You will never beat me!!!!")
+if (game.numberOfGuesses < game.numberOfGuessesForUsr) {
+  alert("You had to guess " + ((game.numberOfGuessesForUsr - game.numberOfGuesses) + 1) + " times! You will never beat me!!!!")
 } else {
   alert("You must have cheated.")
 }
